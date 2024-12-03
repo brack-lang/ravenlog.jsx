@@ -1,14 +1,12 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+use bold::metadata_bold;
+use brack_pdk_rs::metadata::Metadata;
+use extism_pdk::{plugin_fn, FnResult, Json};
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub mod bold;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+#[plugin_fn]
+pub fn get_metadata() -> FnResult<Json<Vec<Metadata>>> {
+    let mut metadata = Vec::new();
+    metadata.push(metadata_bold());
+    Ok(Json(metadata))
 }
