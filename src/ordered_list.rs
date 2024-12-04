@@ -30,10 +30,7 @@ pub fn ordered_list(Json(args): Json<Vec<Value>>) -> FnResult<String> {
     let mut items_str = String::new();
     for item in items {
         if item.starts_with("<UnorderedList>") || item.starts_with("<OrderedList>") {
-            return Err(WithReturnCode::new(
-                anyhow::anyhow!("items cannot contain another list"),
-                1,
-            ));
+            items_str.push_str(&item);
         } else {
             items_str.push_str(&format!("<ListItem>{}</ListItem>", item));
         }
