@@ -3,7 +3,7 @@ use extism_pdk::{plugin_fn, FnResult, Json, WithReturnCode};
 
 pub(crate) fn metadata_block_quote() -> Metadata {
     Metadata {
-        command_name: ">".to_string(),
+        command_name: "quote".to_string(),
         call_name: "block_quote".to_string(),
         argument_types: vec![("text".to_string(), Type::TInline)],
         return_type: Type::TBlock,
@@ -14,7 +14,7 @@ pub(crate) fn metadata_block_quote() -> Metadata {
 pub fn block_quote(Json(args): Json<Vec<Value>>) -> FnResult<String> {
     if args.len() != 1 {
         return Err(WithReturnCode::new(
-            anyhow::anyhow!("Usage: {{ravenlog.> text}}"),
+            anyhow::anyhow!("Usage: {{ravenlog.quote text}}"),
             1,
         ));
     }
