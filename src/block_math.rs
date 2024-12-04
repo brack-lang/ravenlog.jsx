@@ -27,5 +27,5 @@ pub fn block_formula(Json(args): Json<Vec<Value>>) -> FnResult<String> {
             ))
         }
     };
-    Ok(format!("<BlockMath>{}</BlockMath>", formula))
+    Ok(format!("<BlockMath math=\"{}\" />", formula))
 }

@@ -27,5 +27,5 @@ pub fn inline_math(Json(args): Json<Vec<Value>>) -> FnResult<String> {
             ))
         }
     };
-    Ok(format!("<InlineMath>{}</InlineMath>", formula))
+    Ok(format!("<InlineMath math=\"{}\" />", formula))
 }
