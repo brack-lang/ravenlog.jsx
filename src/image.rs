@@ -12,9 +12,11 @@ pub(crate) fn metadata_image() -> Metadata {
 
 #[plugin_fn]
 pub fn image(Json(args): Json<Vec<Value>>) -> FnResult<String> {
-    if args.len() != 2 && args.len() != 3 {
+    if args.len() != 3 {
         return Err(WithReturnCode::new(
-            anyhow::anyhow!("Usage: {{ravenlog.img src, alt [, caption]}}"),
+            anyhow::anyhow!("Usage:
+    1. {{ravenlog.img src, alt}}
+    2. {{ravenlog.img src, alt, caption}}"),
             1,
         ));
     }
@@ -36,7 +38,7 @@ pub fn image(Json(args): Json<Vec<Value>>) -> FnResult<String> {
             ))
         }
     };
-    let caption = match &args[1] {
+    let caption = match &args[2] {
         Value::TextOption(t) => t,
         _ => {
             return Err(WithReturnCode::new(
