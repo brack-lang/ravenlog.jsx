@@ -36,12 +36,11 @@ pub fn image(Json(args): Json<Vec<Value>>) -> FnResult<String> {
             ))
         }
     };
-    let caption = match args.get(2) {
-        Some(Value::Text(t)) => Some(t),
-        None => None,
+    let caption = match &args[1] {
+        Value::TextOption(t) => t,
         _ => {
             return Err(WithReturnCode::new(
-                anyhow::anyhow!("caption must be Value::Text"),
+                anyhow::anyhow!("caption must be Value::TextOption"),
                 1,
             ))
         }
